@@ -58,8 +58,9 @@ app
   .use(router.allowedMethods());
 
 const port = process.env.PORT || 80;
-async function bootstrap() {
-  await initDB();
+const isDev = process.env.NODE_ENV == 'development';
+async function bootstrap () {
+  if(!isDev) await initDB();
   app.listen(port, () => {
     console.log("启动成功", port);
   });
